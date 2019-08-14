@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Nav from './components/Nav'
 import NewClientForm from './pages/Client/NewClient';
 import ClientList from './pages/Client/ClientList';
+import ClientContactsList from './pages/ClientContacts/ClientContactsList';
 
 
 // import MasterModal from './components/AllModals/MasterModal'
@@ -180,6 +181,13 @@ class App extends Component {
 					path="/clients"  
 					render={(props) =>
 						<ClientList />
+					} 
+				/>
+				<Route 
+					exact 
+					path="/history"  
+					render={(props) =>
+						<ClientContactsList />
 					} 
 				/>
 				<Route 

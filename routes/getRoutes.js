@@ -29,6 +29,7 @@ module.exports = function(app) {
             .catch(err=> console.log("error: ", err));
     });
 
+    // Get all clients
     app.get("/api/clients", function(req, res) {
         db.clients.findAll({
             attributes: [
@@ -46,7 +47,30 @@ module.exports = function(app) {
                 'phone2Type',
                 'notes',
                 'createdAt'
+
             ]
+        })
+            .then( function (result) {res.json(result)})
+            .catch(err=> console.log("error: ", err));
+    })
+
+    // Get all clientContacts
+    app.get("/api/clientContacts", function(req, res) {
+        db.clientContacts.findAll({
+            attributes: [
+                'id',
+                'contactDate', 
+                'expressedNeed', 
+                'helpProvided',
+                'dollarAmount',
+                'giftCards',
+                'notes',
+                'clientId'
+            ],
+            include: [{
+                model: db.clients, as: 'client', 
+                attributes: ['firstName', 'lastName', 'id']
+            }]
         })
             .then( function (result) {res.json(result)})
             .catch(err=> console.log("error: ", err));

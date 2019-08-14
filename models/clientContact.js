@@ -1,6 +1,5 @@
-/* POST MODULE
-    defines the POST table that has the debate topics,
-    the debate context and associated userID */
+/* clientContacts MODULE
+    defines the deacon encounter with associated clients */
 
 module.exports = function (sequelize, DataTypes) {
     var clientContacts = sequelize.define("clientContacts", {
