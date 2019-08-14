@@ -87,101 +87,126 @@ class NewClientForm extends Component {
 		}
 		return (
 			<div className="NewClientForm">
-				
-				<h1>New Client form</h1>
-				<label htmlFor="firstName">First Name: </label>
-				<input
-					type="text"
-					name="firstName"
-					value={this.state.firstName}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="lastName">Last Name: </label>
-				<input
-					type="text"
-					name="lastName"
-					value={this.state.lastName}
-					onChange={this.handleChange}
-				/>
-        <label htmlFor="streetAddress1">Street Address 1: </label>
-        <input
-          type="text"
-          name="streetAddress1"
-          value={this.state.streetAddress1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="streetAddress2">Street address 2: </label>
-        <input
-          type="text"
-          name="streetAddress2"
-          value={this.state.streetAddress2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="city">City: </label>
-        <input
-          type="text"
-          name="city"
-          value={this.state.city}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="state">State: </label>
-        <input
-          type="text"
-          name="state"
-          value={this.state.state}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="ZIP">ZIP: </label>
-        <input
-          type="text"
-          name="ZIP"
-          value={this.state.ZIP}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1">Phone number 1: </label>
-        <input
-          type="text"
-          name="phone1"
-          value={this.state.phone1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1Type">Phone 1 Type: </label>
-        <input
-          type="text"
-          name="phone1Type"
-          value={this.state.phone1Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2">Phone 2: </label>
-        <input
-          type="text"
-          name="phone2"
-          value={this.state.phone2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2Type">Phone 2 Type: </label>
-        <input
-          type="text"
-          name="phone2Type"
-          value={this.state.phone2Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="notes">Additional Notes: </label>
-        <input
-          type="text"
-          name="notes"
-          value={this.state.notes}
-          onChange={this.handleChange}
-        />
-				<label htmlFor="email">Email address: </label>
-				<input
-					type="text"
-					name="email"
-					value={this.state.email}
-					onChange={this.handleChange}
-				/>
-				<button onClick={this.handleSubmit}>Submit</button>
-			</div>
+				<div class="container">
+          <div className="row">
+            <h1 className="col-sm-12 text-center bg-primary text-light">New Client form</h1>
+          </div>
+          <div className="row p-1">
+            <div className="col-sm-12">
+              <label className="mr-2" htmlFor="firstName">First Name: </label>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div> 
+          <div className="row  p-1">
+            <div className="col-sm-12">
+              <label className="mr-2" htmlFor="lastName">Last Name: </label>
+              <input
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <div className="row  p-1">
+            <div className="col-sm-12">
+              <label className="mr-2" htmlFor="streetAddress1"></label>
+              <input
+                className="form-control mr-2"
+                placeholder="Address 1"
+                type="text"
+                name="streetAddress1"
+                value={this.state.streetAddress1}
+                onChange={this.handleChange}
+                />
+            </div>
+          </div>
+          <div className="row  p-1">
+            <div className="col-sm-12">
+              <label className="mr-2" htmlFor="streetAddress2"></label>
+              <input
+                className="form-control mr-2"
+                placeholder="Address 2"
+                type="text"
+                name="streetAddress2"
+                value={this.state.streetAddress2}
+                onChange={this.handleChange}
+                size="100"
+                />
+            </div>
+          </div>
+          <label htmlFor="city">City: </label>
+          <input
+            type="text"
+            name="city"
+            value={this.state.city}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="state">State: </label>
+          <input
+            type="text"
+            name="state"
+            value={this.state.state}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="ZIP">ZIP: </label>
+          <input
+            type="text"
+            name="ZIP"
+            value={this.state.ZIP}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="phone1">Phone number 1: </label>
+          <input
+            type="text"
+            name="phone1"
+            value={this.state.phone1}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="phone1Type">Phone 1 Type: </label>
+          <input
+            type="text"
+            name="phone1Type"
+            value={this.state.phone1Type}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="phone2">Phone 2: </label>
+          <input
+            type="text"
+            name="phone2"
+            value={this.state.phone2}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="phone2Type">Phone 2 Type: </label>
+          <input
+            type="text"
+            name="phone2Type"
+            value={this.state.phone2Type}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="notes">Additional Notes: </label>
+          <input
+            type="text"
+            name="notes"
+            value={this.state.notes}
+            onChange={this.handleChange}
+            />
+          <label htmlFor="email">Email address: </label>
+          <input
+            type="text"
+            name="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+            />
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div> 
+			</div> 
 		)
 	}
 }
