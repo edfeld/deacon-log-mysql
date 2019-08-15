@@ -75,6 +75,76 @@ module.exports = function(app) {
             .then( function (result) {res.json(result)})
             .catch(err=> console.log("error: ", err));
     })
+    // Get all clients
+    app.get("/api/clients", function(req, res) {
+        db.clients.findAll({
+            attributes: [
+                'id',
+                'firstName', 
+                'lastName', 
+                'streetAddress1',
+                'streetAddress2',
+                'city',
+                'state',
+                'ZIP',
+                'phone1',
+                'phone1Type',
+                'phone2',
+                'phone2Type',
+                'notes',
+                'createdAt'
+
+            ]
+        })
+            .then( function (result) {res.json(result)})
+            .catch(err=> console.log("error: ", err));
+    })
+
+    // Get all clientContacts
+    app.get("/api/clientContacts", function(req, res) {
+        db.clientContacts.findAll({
+            attributes: [
+                'id',
+                'contactDate', 
+                'expressedNeed', 
+                'helpProvided',
+                'dollarAmount',
+                'giftCards',
+                'notes',
+                'clientId'
+            ],
+            include: [{
+                model: db.clients, as: 'client', 
+                attributes: ['firstName', 'lastName', 'id']
+            }]
+        })
+            .then( function (result) {res.json(result)})
+            .catch(err=> console.log("error: ", err));
+    })
+
+    // Get all clientContacts for one client
+    app.get("/api/clientContacts/:id", function(req, res) {
+        db.clientContacts.findAll({
+            attributes: [
+                'id',
+                'contactDate', 
+                'expressedNeed', 
+                'helpProvided',
+                'dollarAmount',
+                'giftCards',
+                'notes',
+                'clientId'
+            ],
+            include: [{
+                model: db.clients, as: 'client', 
+                attributes: ['firstName', 'lastName', 'id']
+            }],
+            where: {clientId: req.params.id}
+        })
+            .then( function (result) {res.json(result)})
+            .catch(err=> console.log("error: ", err));
+    })
+
 
     //retrieves info for all info for a single user
     // app.get("/api/user/:id", function(req, res) {

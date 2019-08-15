@@ -2,26 +2,15 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import ClientContactCard from '../../components/ClientContactCard/ClientContactCard';
+import ClientSearchCard from '../../components/ClientSearchCard/ClientSearchCard';
 
 class ClientContactList extends Component {
 	constructor() {
 		super()
 		this.state = {
-      clientContacts: {},
-			// firstName: '',
-      // lastName: '',
-      // streetAddress1: '',
-      // streetAddress2: '', 
-      // city: '', 
-      // state: '', 
-      // ZIP: '', 
-      // phone1: '',
-      // phone1Type: '',
-      // phone2: '',
-      // phone2Type: '',
-      // notes: '',
-      // email: '', 
-			// redirectTo: null
+      clientContacts: [],
+      clientNames: []
+			
 		}
 		// this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleChange = this.handleChange.bind(this)
@@ -31,18 +20,28 @@ class ClientContactList extends Component {
   
   componentWillMount() {
     axios
+      .get("/api/clients")
+      .then(response => { console.log("hitting /api/clients (all) in Clients"); 
+        this.setState({clientNames: response.data});
+        console.log("clients ==>>>> ", this.state.clientNames);
+      })
+      .catch(
+        this.setState({ client: [],
+        message: "No Contacts List Found."
+        })
+      );
+    axios
       .get('/api/clientContacts')
       .then(response => {
         console.log('Hitting /api/clientContacts call');
-        this.setState({ clientContacts: response.data})
-        console.log("this.state.clientContacts Data: ====+=+>", this.state.clientContacts)
+        this.setState({ clientContacts: response.data});
+        console.log("this.state.clientContacts Data: ====+=+>", this.state.clientContacts);
       })
       .catch(
         this.setState({ clientContacts: [],
         message: "No ClientContacts List Found."
         })
-      )
-    
+      );
   }
 	// handleChange(event) {
 	// 	this.setState({
@@ -79,6 +78,9 @@ class ClientContactList extends Component {
 		return (
 			<div className="ClientContactsForm">
 				<h3>Client Encounters List form</h3>
+        <ClientSearchCard 
+          clientNames={this.state.clientNames}
+        />
         {this.state.clientContacts.map( clientContacts => (
           <ClientContactCard
             key={clientContacts.id}
