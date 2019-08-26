@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Nav from './components/Nav'
 import NewClientForm from './pages/Client/NewClient';
 import ClientList from './pages/Client/ClientList';
+import NewClientContact from './pages/ClientContacts/NewClientContact';
 import ClientContactsList from './pages/ClientContacts/ClientContactsList';
 
 
@@ -164,8 +165,6 @@ class App extends Component {
 					path="/user"  // [ere] 20190205-1900
 					render={(props) =>
 						<div>
-							
-						
 						</div>
 					} 
 				/>
@@ -188,6 +187,13 @@ class App extends Component {
 					path="/history"  
 					render={(props) =>
 						<ClientContactsList />
+					} 
+				/>
+				<Route 
+					exact 
+					path="/newencounter"  
+					render={(props) =>
+						<NewClientContact />
 					} 
 				/>
 				<Route 

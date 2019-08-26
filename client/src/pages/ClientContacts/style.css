@@ -1,0 +1,15 @@
+/* ClientContacts */
+
+.dollar-amt-lbl {
+  float: left;
+  padding-top: .35em;
+}
+.dollar-amount {
+  width: 150px;
+  float: left;
+}
+
+.gift-card-lbl {
+  float: left;
+  padding-top: .35em;
+}

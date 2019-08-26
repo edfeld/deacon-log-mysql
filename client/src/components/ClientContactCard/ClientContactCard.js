@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem } from "../List";
 import { Row, Col } from "../Grid";
+import Moment from 'react-moment';
 import "./style.css";
 
 // function Book({ title, subtitle, authors, link, description, image, Button }) {
@@ -14,21 +15,33 @@ function ClientContactCard( props ) {
       </Row>
       <Row>
         <Col size="md-12">
-            <div className="font-italic">Contact made on: {props.contactDate}</div>
+            <div className="font-italic">{`Contact made on:  `} 
+            <Moment format="MM/DD/YYYY">
+            {props.contactDate}
+            </Moment> 
+            {/* {props.contactDate} */}
+            </div>
           </Col>
       </Row>
       <Row>
           <Col size="md-12">
-            <div className="font-italic">Expressed Need:{props.expressedNeed}</div>
+            <div className="font-italic">{`Expressed Need: ${props.expressedNeed}`}</div>
           </Col>
       </Row>
       <Row>
           <Col size="md-12">
-            <div className="font-italic">Help Provided:{props.helpProvided}</div>
+            <div className="font-italic">{`Help Provided: ${props.helpProvided}`}</div>
           </Col>
       </Row>
       <Row>
-        <div>Notes</div>
+          <Col size="md-12">
+            <div className="font-italic">{`Dollar Amount: ${props.dollarAmount}`}</div>
+          </Col>
+      </Row>
+      <Row>
+        <Col size="md-12">
+        <div className="font-italic">{`Notes: ${props.notes}`}</div>
+        </Col>
       </Row>
     </ListItem>
   );

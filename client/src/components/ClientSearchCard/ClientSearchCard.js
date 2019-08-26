@@ -38,8 +38,9 @@ class ClientSearchCard extends Component {
           <span className="caret"></span></button>
           <ul className="dropdown-menu">
             { this.state.clientNames.map( client => (
-              <li key={client.id}>{client.lastName}, {client.firstName}</li>
+              <li className="sel-client-name" key={client.id} onClick={()=> this.props.clientChange(client.id)}>{client.lastName}, {client.firstName}</li>
             ))}
+            {/* this is just an example<button onClick={() => props.renderChatroom(key)}>Chat button</button> */}
             {/* <li><a href="#">HTML</a></li>
             <li><a href="#">CSS</a></li>
             <li><a href="#">JavaScript</a></li>

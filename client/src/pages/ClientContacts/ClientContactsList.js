@@ -9,16 +9,15 @@ class ClientContactList extends Component {
 		super()
 		this.state = {
       clientContacts: [],
-      clientNames: []
+      clientNames: [],
+      selectClientName: {}
 			
 		}
 		// this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleChange = this.handleChange.bind(this)
+    this.handleClientChange = this.handleClientChange.bind(this);
     
-    
-  }
-  
-  componentWillMount() {
+    // Get all clients
     axios
       .get("/api/clients")
       .then(response => { console.log("hitting /api/clients (all) in Clients"); 
@@ -36,6 +35,48 @@ class ClientContactList extends Component {
         console.log('Hitting /api/clientContacts call');
         this.setState({ clientContacts: response.data});
         console.log("this.state.clientContacts Data: ====+=+>", this.state.clientContacts);
+      })
+      .catch(
+        this.setState({ clientContacts: [],
+        message: "No ClientContacts List Found."
+        })
+      );
+  }
+  
+  componentWillMount() {
+    // axios
+    //   .get("/api/clients")
+    //   .then(response => { console.log("hitting /api/clients (all) in Clients"); 
+    //     this.setState({clientNames: response.data});
+    //     console.log("clients ==>>>> ", this.state.clientNames);
+    //   })
+    //   .catch(
+    //     this.setState({ client: [],
+    //     message: "No Contacts List Found."
+    //     })
+    //   );
+    // axios
+    //   .get('/api/clientContacts')
+    //   .then(response => {
+    //     console.log('Hitting /api/clientContacts call');
+    //     this.setState({ clientContacts: response.data});
+    //     console.log("this.state.clientContacts Data: ====+=+>", this.state.clientContacts);
+    //   })
+    //   .catch(
+    //     this.setState({ clientContacts: [],
+    //     message: "No ClientContacts List Found."
+    //     })
+    //   );
+  }
+
+  handleClientChange(clientId) {
+    console.log("clientId==> ", clientId);
+    axios
+      .get('/api/clientContacts/' + clientId)
+      .then(response => {
+        console.log('Hitting /api/clientContacts/:clientId call');
+        this.setState({ clientContacts: response.data});
+        console.log("this.state.clientContacts Data CCL: ===+=+=+>", this.state.clientContacts);
       })
       .catch(
         this.setState({ clientContacts: [],
@@ -77,10 +118,12 @@ class ClientContactList extends Component {
 		}
 		return (
 			<div className="ClientContactsForm">
-				<h3>Client Encounters List form</h3>
+				<h3>Client Encounters</h3>
         <ClientSearchCard 
           clientNames={this.state.clientNames}
+          clientChange={this.handleClientChange}
         />
+        <div className="container">
         {this.state.clientContacts.map( clientContacts => (
           <ClientContactCard
             key={clientContacts.id}
@@ -89,101 +132,12 @@ class ClientContactList extends Component {
             contactDate={clientContacts.contactDate}
             expressedNeed={clientContacts.expressedNeed}
             helpProvided={clientContacts.helpProvided}
+            dollarAmount={clientContacts.dollarAmount}
+            notes={clientContacts.notes}
           />
         ))}
-				{/* <h1>New Client form</h1>
-				<label htmlFor="firstName">First Name: </label>
-				<input
-					type="text"
-					name="firstName"
-					value={this.state.firstName}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="lastName">Last Name: </label>
-				<input
-					type="text"
-					name="lastName"
-					value={this.state.lastName}
-					onChange={this.handleChange}
-				/>
-        <label htmlFor="streetAddress1">Street Address 1: </label>
-        <input
-          type="text"
-          name="streetAddress1"
-          value={this.state.streetAddress1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="streetAddress2">Street address 2: </label>
-        <input
-          type="text"
-          name="streetAddress2"
-          value={this.state.streetAddress2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="city">City: </label>
-        <input
-          type="text"
-          name="city"
-          value={this.state.city}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="state">State: </label>
-        <input
-          type="text"
-          name="state"
-          value={this.state.state}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="ZIP">ZIP: </label>
-        <input
-          type="text"
-          name="ZIP"
-          value={this.state.ZIP}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1">Phone number 1: </label>
-        <input
-          type="text"
-          name="phone1"
-          value={this.state.phone1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1Type">Phone 1 Type: </label>
-        <input
-          type="text"
-          name="phone1Type"
-          value={this.state.phone1Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2">Phone 2: </label>
-        <input
-          type="text"
-          name="phone2"
-          value={this.state.phone2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2Type">Phone 2 Type: </label>
-        <input
-          type="text"
-          name="phone2Type"
-          value={this.state.phone2Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="notes">Additional Notes: </label>
-        <input
-          type="text"
-          name="notes"
-          value={this.state.notes}
-          onChange={this.handleChange}
-        />
-				<label htmlFor="email">Email address: </label>
-				<input
-					type="text"
-					name="email"
-					value={this.state.email}
-					onChange={this.handleChange}
-				/>
-				<button onClick={this.handleSubmit}>Submit</button> */}
+        </div>{/* container */}
+				
 			</div>
 		)
 	}
