@@ -22,19 +22,20 @@ class NewClientContact extends Component {
 		this.handleChange = this.handleChange.bind(this)
 	}
 	handleChange(event) {
+    console.log("Handle Change Event. Value: ", event.target.value);
 		this.setState({
 			[event.target.name]: event.target.value
 		})
 	}
 	handleSubmit(event) {
-    // if( !(this.state.firstName) ) {
-    //   alert("First Name is required!")
-    //   return;
-    // }
-    // if( !(this.state.lastName) ) {
-    //   alert("Last Name is required!")
-    //   return;
-    // }
+    if( !(this.state.firstName) ) {
+      alert("First Name is required!")
+      return;
+    }
+    if( !(this.state.lastName) ) {
+      alert("Last Name is required!")
+      return;
+    }
     // if( !(this.state.phone1) ) {
     //   alert("Phone number 1 is required!")
     //   return;

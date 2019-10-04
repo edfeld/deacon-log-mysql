@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import Dropdown from 'react-dropdown';
+import './NewClient.css';
+
+const options = [
+  'WA', 'OR', 'ID'
+]
 
 class NewClientForm extends Component {
 	constructor() {
@@ -19,16 +25,27 @@ class NewClientForm extends Component {
       phone2Type: '',
       notes: '',
       email: '', 
+      selected: '',
 			redirectTo: null
-		}
+    }
 		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this._onSelect = this._onSelect.bind(this);
+
+    this.state.selected = "WA";
 	}
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
 		})
-	}
+  }
+
+  _onSelect (option) {
+    console.log(option);
+    console.log('You selected ', option.label);
+    this.setState({selected: option, state: option.value});
+  }
+
 	handleSubmit(event) {
     if( !(this.state.firstName) ) {
       alert("First Name is required!")
@@ -82,12 +99,15 @@ class NewClientForm extends Component {
 			})
 	}
 	render() {
+    const defaultOption = this.state.selected;
+    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
+
 		if (this.state.redirectTo) {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		}
 		return (
 			<div className="NewClientForm">
-				<div class="container">
+				<div className="container">
           <div className="row">
             <h1 className="col-sm-12 text-center bg-primary text-light">New Client form</h1>
           </div>
@@ -116,7 +136,7 @@ class NewClientForm extends Component {
           </div>
           <div className="row  p-1">
             <div className="col-sm-12">
-              <label className="mr-2" htmlFor="streetAddress1"></label>
+              {/* <label className="mr-2" htmlFor="streetAddress1"></label> */}
               <input
                 className="form-control mr-2"
                 placeholder="Address 1"
@@ -129,7 +149,7 @@ class NewClientForm extends Component {
           </div>
           <div className="row  p-1">
             <div className="col-sm-12">
-              <label className="mr-2" htmlFor="streetAddress2"></label>
+              {/* <label className="mr-2" htmlFor="streetAddress2"></label> */}
               <input
                 className="form-control mr-2"
                 placeholder="Address 2"
@@ -141,7 +161,7 @@ class NewClientForm extends Component {
                 />
             </div>
           </div>
-          <label htmlFor="city">City: </label>
+          <label className="mr-2"  htmlFor="city">City: </label>
           <input
             type="text"
             name="city"
@@ -149,12 +169,18 @@ class NewClientForm extends Component {
             onChange={this.handleChange}
             />
           <label htmlFor="state">State: </label>
-          <input
+          {/* <input
             type="text"
             name="state"
             value={this.state.state}
             onChange={this.handleChange}
             />
+            <span>State: </span> */}
+          <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="WA" />
+          <div className='result'>
+            You selected
+            <strong> {placeHolderValue} </strong>
+          </div>
           <label htmlFor="ZIP">ZIP: </label>
           <input
             type="text"
