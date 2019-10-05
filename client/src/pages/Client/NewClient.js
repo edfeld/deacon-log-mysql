@@ -169,13 +169,7 @@ class NewClientForm extends Component {
             onChange={this.handleChange}
             />
           <label htmlFor="state">State: </label>
-          {/* <input
-            type="text"
-            name="state"
-            value={this.state.state}
-            onChange={this.handleChange}
-            />
-            <span>State: </span> */}
+          {/* This drop down came from https://github.com/fraserxu/react-dropdown */}
           <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="WA" />
           <div className='result'>
             You selected
