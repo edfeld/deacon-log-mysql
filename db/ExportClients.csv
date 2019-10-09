@@ -1,0 +1,2 @@
+id,firstName,lastName,streetAddress1,streetAddress2,city,state,ZIP,phone1,phone1Type,phone2,phone2Type,notes,email,createdAt,updatedAt,deletedAt
+14,Square,Pants,"Under the Sea",,Pinapple,,98111,4323334444,mobile,,,,sponge@undersea.com,"2019-10-07 04:11:40","2019-10-07 04:11:40",NULL

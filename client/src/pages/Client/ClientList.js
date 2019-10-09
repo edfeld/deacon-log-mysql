@@ -86,101 +86,17 @@ class ClientList extends Component {
             firstName={client.firstName}
             streetAddress1={client.streetAddress1}
             streetAddress2={client.streetAddress2}
+            city={client.city}
+            USState={client.state}
+            ZIP={client.ZIP}
+            phone1={client.phone1}
+            phone1Type={client.phone1Type}
+            phone2={client.phone2}
+            phone2Type={client.phone2Type}
+            notes={client.notes}
           />
         ))}
-				{/* <h1>New Client form</h1>
-				<label htmlFor="firstName">First Name: </label>
-				<input
-					type="text"
-					name="firstName"
-					value={this.state.firstName}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="lastName">Last Name: </label>
-				<input
-					type="text"
-					name="lastName"
-					value={this.state.lastName}
-					onChange={this.handleChange}
-				/>
-        <label htmlFor="streetAddress1">Street Address 1: </label>
-        <input
-          type="text"
-          name="streetAddress1"
-          value={this.state.streetAddress1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="streetAddress2">Street address 2: </label>
-        <input
-          type="text"
-          name="streetAddress2"
-          value={this.state.streetAddress2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="city">City: </label>
-        <input
-          type="text"
-          name="city"
-          value={this.state.city}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="state">State: </label>
-        <input
-          type="text"
-          name="state"
-          value={this.state.state}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="ZIP">ZIP: </label>
-        <input
-          type="text"
-          name="ZIP"
-          value={this.state.ZIP}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1">Phone number 1: </label>
-        <input
-          type="text"
-          name="phone1"
-          value={this.state.phone1}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone1Type">Phone 1 Type: </label>
-        <input
-          type="text"
-          name="phone1Type"
-          value={this.state.phone1Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2">Phone 2: </label>
-        <input
-          type="text"
-          name="phone2"
-          value={this.state.phone2}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="phone2Type">Phone 2 Type: </label>
-        <input
-          type="text"
-          name="phone2Type"
-          value={this.state.phone2Type}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="notes">Additional Notes: </label>
-        <input
-          type="text"
-          name="notes"
-          value={this.state.notes}
-          onChange={this.handleChange}
-        />
-				<label htmlFor="email">Email address: </label>
-				<input
-					type="text"
-					name="email"
-					value={this.state.email}
-					onChange={this.handleChange}
-				/>
-				<button onClick={this.handleSubmit}>Submit</button> */}
+				
 			</div>
 		)
 	}

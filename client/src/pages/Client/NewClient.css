@@ -3,6 +3,10 @@ body {
   width: 60%;
 }
 
+.zip {
+  width: 58px;
+}
+
 header h2 {
   text-align: center;
   margin: 30px auto;

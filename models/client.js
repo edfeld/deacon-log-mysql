@@ -98,11 +98,8 @@
             },
             
 		    email: {
-            type: DataTypes.STRING,
-            notNull: false,
-            validate: {
-                isEmail: true
-						}
+                type: DataTypes.STRING,
+                allowNull: true
 			
             },
             

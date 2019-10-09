@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import Dropdown from 'react-dropdown';
+import USStates from '../../USStates.json';
 import './NewClient.css';
 
-const options = [
-  'WA', 'OR', 'ID'
-]
+// const options = [
+//   'WA', 'OR', 'ID'
+// ]
+const optionsPhoneType = [ "Mobile", "Home",  "Work", "Other" ];
 
+const optionsStates = USStates;
+// console.log(options);
 class NewClientForm extends Component {
 	constructor() {
 		super()
@@ -30,9 +34,11 @@ class NewClientForm extends Component {
     }
 		this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this._onSelect = this._onSelect.bind(this);
+    this._onSelectState = this._onSelectState.bind(this);
+    this._onSelectPhone1Type = this._onSelectPhone1Type.bind(this);
+    this._onSelectPhone2Type = this._onSelectPhone2Type.bind(this);
 
-    this.state.selected = "WA";
+    this.state.selected = "";
 	}
 	handleChange(event) {
 		this.setState({
@@ -40,10 +46,22 @@ class NewClientForm extends Component {
 		})
   }
 
-  _onSelect (option) {
-    console.log(option);
-    console.log('You selected ', option.label);
-    this.setState({selected: option, state: option.value});
+  _onSelectState (option) {
+    // console.log(option);
+    console.log('You selected State, ', option.label);
+    this.setState({state: option.value});
+  }
+
+  _onSelectPhone1Type (phoneType) {
+    // console.log(phoneType);
+    console.log('You selected Phone 1 Type: ', phoneType.label);
+    this.setState({selected: phoneType, phone1Type: phoneType.value});
+  }
+
+  _onSelectPhone2Type (phoneType) {
+    // console.log(phoneType);
+    console.log('You selected Phone 2 Type: ', phoneType.label);
+    this.setState({selected: phoneType, phone2Type: phoneType.value});
   }
 
 	handleSubmit(event) {
@@ -55,8 +73,24 @@ class NewClientForm extends Component {
       alert("Last Name is required!")
       return;
     }
+    if( !this.state.state ) {
+      alert("State has not been selected!")
+      return
+    }
+    if( !((this.state.ZIP.length === 5) || (this.state.ZIP.length === 9 ))) {
+      alert("ZIP must be 5 or 9 digits!");
+      return;
+    }
     if( !(this.state.phone1) ) {
       alert("Phone number 1 is required!")
+      return;
+    }
+    if ( !(this.state.phone1.length === 10 )) {
+      alert("Phone number 1 must be 10 digits!")
+      return;
+    }
+    if ( (this.state.phone2) && !(this.state.phone2.length === 10 )) {
+      alert("Phone number 2 must be 10 digits!")
       return;
     }
     if(!!(this.state.email)) {
@@ -88,18 +122,23 @@ class NewClientForm extends Component {
 				if (!response.data.errmsg) {
 					console.log('SUCCESSFULLY added to Database')
 					this.setState({
-						redirectTo: '/client'
+						redirectTo: '/clients'
 					})
 				} else {
 					console.log('duplicate')
 				}
 			})
 			.catch(err => {
-				console.log("GOOGLE OAUTH ERROR: ", err)
+        console.log("Database Error, Client Post ", err);
+        alert("Error Adding Client to the database. Error:", err);
 			})
 	}
 	render() {
-    const defaultOption = this.state.selected;
+    const defaultOptionState = this.state.state;
+    console.log("defaultOptionState: ", defaultOptionState);
+    const defaultOptionPhone1Type = this.state.phone1Type;
+    const defaultOptionPhone2Type = this.state.phone2Type;
+    console.log("defaultOptionPhone1Type: ", defaultOptionPhone1Type)
     const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
 
 		if (this.state.redirectTo) {
@@ -170,13 +209,13 @@ class NewClientForm extends Component {
             />
           <label htmlFor="state">State: </label>
           {/* This drop down came from https://github.com/fraserxu/react-dropdown */}
-          <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="WA" />
-          <div className='result'>
+          <Dropdown options={optionsStates} onChange={this._onSelectState} value={this.state.state} placeholder="Select" />
+          {/* <div className='result'>
             You selected
             <strong> {placeHolderValue} </strong>
-          </div>
+          </div> */}
           <label htmlFor="ZIP">ZIP: </label>
-          <input
+          <input className="zip"
             type="text"
             name="ZIP"
             value={this.state.ZIP}
@@ -190,12 +229,13 @@ class NewClientForm extends Component {
             onChange={this.handleChange}
             />
           <label htmlFor="phone1Type">Phone 1 Type: </label>
-          <input
+          <Dropdown options={optionsPhoneType} onChange={this._onSelectPhone1Type} value={defaultOptionPhone1Type} placeholder="Select type" />
+          {/* <input
             type="text"
             name="phone1Type"
             value={this.state.phone1Type}
             onChange={this.handleChange}
-            />
+            /> */}
           <label htmlFor="phone2">Phone 2: </label>
           <input
             type="text"
@@ -204,12 +244,13 @@ class NewClientForm extends Component {
             onChange={this.handleChange}
             />
           <label htmlFor="phone2Type">Phone 2 Type: </label>
-          <input
+          <Dropdown options={optionsPhoneType} onChange={this._onSelectPhone2Type} value={defaultOptionPhone2Type} placeholder="Select type" />
+          {/* <input
             type="text"
             name="phone2Type"
             value={this.state.phone2Type}
             onChange={this.handleChange}
-            />
+            /> */}
           <label htmlFor="notes">Additional Notes: </label>
           <input
             type="text"

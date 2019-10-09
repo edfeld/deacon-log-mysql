@@ -11,7 +11,6 @@ class ClientSearchCard extends Component {
       clientNames: []
 			
 		}
-    
   }
 
   componentWillMount() {
@@ -34,7 +33,7 @@ class ClientSearchCard extends Component {
       <div className="container bg-white">
         
         <div className="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Contacts
+          <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Contacts
           <span className="caret"></span></button>
           <ul className="dropdown-menu">
             { this.state.clientNames.map( client => (
