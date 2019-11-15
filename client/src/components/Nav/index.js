@@ -26,7 +26,7 @@ class Nav extends Component {
     window.addEventListener("resize", this.updateWidth);
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     window.removeEventListener("resize", this.updateWidth);
   }
 
@@ -92,13 +92,22 @@ class Nav extends Component {
               </div>
             </li>
             <li className="nav-item dropdown">
-            <Link
-                  onClick={this.toggleNav}
-                  className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
-                  to="/login"
-                >
-                  Login
-                </Link>
+              <Link
+                onClick={this.toggleNav}
+                className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
+                to="/login"
+              >
+                Login
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                onClick={this.props._logout}
+                className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
+                to="/"
+              >
+                Logout
+              </Link>
             </li>
           </ul>
         </div>

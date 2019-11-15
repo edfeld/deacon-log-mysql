@@ -8,7 +8,7 @@ function ClientCard( props ) {
   // console.log("props in clientCard: ", props);
   return (
     <ListItem>
-      <Row className="flex-wrap-reverse">
+      <Row className="">
         <Col size="md-4">
           <div className="">Name: <span className="font-italic">{props.lastName}, {props.firstName}</span></div>
         </Col>

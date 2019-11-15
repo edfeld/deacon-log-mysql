@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter , Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+// import { BrowserRouter , Route, Link } from 'react-router-dom'
 import LoginForm from './components/Login/LoginForm'
 // import SignupForm from './components/SignupForm'
 import Home from './pages/Home'
@@ -55,7 +56,7 @@ class App extends Component {
 					loggedIn: false,
 					user: null
 				})
-				console.log("componentDidMount. user: ", this.state.user);
+				console.log("App.js - componentDidMount. user: ", this.state.user);
 			}
 		})
 
@@ -130,10 +131,14 @@ class App extends Component {
 	// }
 
 	render() {
-		
+		if (this.state.user) {
+		console.log("apps.js user, loggedIn: ", this.state.user.username + " " + this.state.loggedIn);
+		}
 		return (
 			<div className="App" style={{height: '100%'}}>
-				<Nav />
+				<Nav 
+					_logout={this._logout}
+				/>
 				<Route 
 					exact 
 					path="/" 
@@ -152,7 +157,6 @@ class App extends Component {
 					path="/login"
 					render={() =>
 						<div className='container'>
-						
 						<LoginForm
 							_login={this._login}
 							_googleSignin={this._googleSignin}
@@ -178,8 +182,11 @@ class App extends Component {
 				<Route 
 					exact 
 					path="/clients"  
-					render={(props) =>
-						<ClientList />
+					render={() =>
+						<ClientList 
+							user={this.state.user}
+							loggedIn={this.state.loggedIn}
+						/>
 					} 
 				/>
 				<Route 

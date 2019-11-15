@@ -30,11 +30,11 @@ const Home = props => {
             <div style={{backgroundImage: "inherit"}}>
               <TitleBar />
               <div className="Home">
-                    {/* <p>Current User:</p>
+                    <p>Current User:</p>
                     <code>
                           {JSON.stringify(props)}
-                    </code> */}
-                    <h1>Home Page 1</h1>
+                    </code>
+                    <h1>Home Page</h1>
               </div>
             </div>
 		)

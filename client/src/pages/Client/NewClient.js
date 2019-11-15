@@ -63,8 +63,9 @@ class NewClientForm extends Component {
     console.log('You selected Phone 2 Type: ', phoneType.label);
     this.setState({selected: phoneType, phone2Type: phoneType.value});
   }
-
+  
 	handleSubmit(event) {
+    // TODO - validate!
     if( !(this.state.firstName) ) {
       alert("First Name is required!")
       return;
@@ -100,7 +101,6 @@ class NewClientForm extends Component {
       }
     }
 		event.preventDefault()
-		// TODO - validate!
 		axios
 			.post('/api/Client', {
 				firstName: this.state.firstName, 

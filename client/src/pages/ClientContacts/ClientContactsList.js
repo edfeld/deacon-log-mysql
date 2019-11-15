@@ -17,30 +17,6 @@ class ClientContactList extends Component {
     // this.handleChange = this.handleChange.bind(this)
     this.handleClientChange = this.handleClientChange.bind(this);
     
-    // Get all clients
-    // axios
-    //   .get("/api/clients")
-    //   .then(response => { console.log("hitting /api/clients (all) in Clients"); 
-    //     this.setState({clientNames: response.data});
-    //     console.log("clients ==>>>> ", this.state.clientNames);
-    //   })
-    //   .catch(
-    //     this.setState({ client: [],
-    //     message: "No Contacts List Found."
-    //     })
-    //   );
-    // axios
-    //   .get('/api/clientContacts')
-    //   .then(response => {
-    //     console.log('Hitting /api/clientContacts call');
-    //     this.setState({ clientContacts: response.data});
-    //     console.log("this.state.clientContacts Data: ====+=+>", this.state.clientContacts);
-    //   })
-    //   .catch(
-    //     this.setState({ clientContacts: [],
-    //     message: "No ClientContacts List Found."
-    //     })
-    //   );
   }
   
   componentWillMount() {

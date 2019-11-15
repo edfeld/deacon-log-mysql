@@ -31,7 +31,6 @@ class ClientSearchCard extends Component {
     console.log("clientNames on ClientSearchCard ===++++>", this.state.clientNames[0]);
     return (
       <div className="container bg-white">
-        
         <div className="dropdown">
           <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Contacts
           <span className="caret"></span></button>
@@ -39,12 +38,6 @@ class ClientSearchCard extends Component {
             { this.state.clientNames.map( client => (
               <li className="sel-client-name" key={client.id} onClick={()=> this.props.clientChange(client.id)}>{client.lastName}, {client.firstName}</li>
             ))}
-            {/* this is just an example<button onClick={() => props.renderChatroom(key)}>Chat button</button> */}
-            {/* <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li class="divider"></li>
-            <li><a href="#">About Us</a></li> */}
           </ul>
         </div>
       </div>

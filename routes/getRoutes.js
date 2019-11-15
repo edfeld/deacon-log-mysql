@@ -20,7 +20,12 @@ module.exports = function(app) {
         db.users.findOne(
             {
                 //need to adjust to exclude personal info
-                attributes: [ 'id', 'username', 'firstName', 'lastName', 'createdAt'],
+                attributes:[ 
+                    'id', 
+                    'username', 
+                    'firstName', 
+                    'lastName', 
+                    'createdAt'],
                 where: {id: req.params.id}
                 
             }).then(function(result) {
@@ -54,6 +59,31 @@ module.exports = function(app) {
             .catch(err=> console.log("error: ", err));
     })
 
+    // Get one clients by Id
+    app.get("/api/client/:id", function(req, res) {
+        db.clients.findOne({
+            attributes: [
+                'id',
+                'firstName', 
+                'lastName', 
+                'streetAddress1',
+                'streetAddress2',
+                'city',
+                'state',
+                'ZIP',
+                'phone1',
+                'phone1Type',
+                'phone2',
+                'phone2Type',
+                'notes',
+                'createdAt'
+            ],
+            where: {id: req.params.id}
+        })
+            .then( function (result) {res.json(result)})
+            .catch(err=> console.log("error: ", err));
+    })
+
     // Get all clientContacts
     app.get("/api/clientContacts", function(req, res) {
         db.clientContacts.findAll({
@@ -71,30 +101,6 @@ module.exports = function(app) {
                 model: db.clients, as: 'client', 
                 attributes: ['firstName', 'lastName', 'id']
             }]
-        })
-            .then( function (result) {res.json(result)})
-            .catch(err=> console.log("error: ", err));
-    })
-    // Get all clients
-    app.get("/api/clients", function(req, res) {
-        db.clients.findAll({
-            attributes: [
-                'id',
-                'firstName', 
-                'lastName', 
-                'streetAddress1',
-                'streetAddress2',
-                'city',
-                'state',
-                'ZIP',
-                'phone1',
-                'phone1Type',
-                'phone2',
-                'phone2Type',
-                'notes',
-                'createdAt'
-
-            ]
         })
             .then( function (result) {res.json(result)})
             .catch(err=> console.log("error: ", err));

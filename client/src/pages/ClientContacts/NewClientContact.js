@@ -1,5 +1,6 @@
 // NewClientContact.js
 import React, { Component } from 'react'
+import ClientSearchCard from '../../components/ClientSearchCard/ClientSearchCard'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import "./style.css"
@@ -8,7 +9,7 @@ class NewClientContact extends Component {
 	constructor() {
 		super()
 		this.state = {
-			contactDate: '',
+      contactDate: '',
       ExpressedNeed: '',
       helpProvided: '',
       dollarAmount: '', 
@@ -16,26 +17,50 @@ class NewClientContact extends Component {
       notes: '',
       clientId: '',
       userId: '',
+      clientNames: [],
+      selectedClientName: '',
       redirectTo: ''
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
-	}
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClientChange = this.handleClientChange.bind(this);
+  }
+  
 	handleChange(event) {
     console.log("Handle Change Event. Value: ", event.target.value);
 		this.setState({
 			[event.target.name]: event.target.value
 		})
-	}
+  }
+  
+  handleClientChange(clientId, firstName, lastName) {
+    console.log("clientId==> ", clientId);
+    this.setState({clientId: clientId})
+    axios
+      .get("/api/client/" + clientId)
+      .then(response => { console.log("hitting /api/clients (one) in Clients", response.data); 
+        this.setState({clientNames: response.data});
+        console.log("clients ==>>>> ", this.state.clientNames);
+        this.setState({selectedClientName: `${response.data.lastName}, ${response.data.firstName}`})
+        console.log("selectedClientName: ",this.state.selectedClientName);
+      })
+      .catch(
+        this.setState({ clientNames: [],
+        message: "No Contacts List Found."
+        })
+      );
+    // this.setState({selectedClientName: `${lastName}, ${firstName}` });
+  
+  }
 	handleSubmit(event) {
-    if( !(this.state.firstName) ) {
-      alert("First Name is required!")
+    if( !(this.state.clientId) ) {
+      alert("Client Name is required!")
       return;
     }
-    if( !(this.state.lastName) ) {
-      alert("Last Name is required!")
-      return;
-    }
+    // if( !(this.state.lastName) ) {
+    //   alert("Last Name is required!")
+    //   return;
+    // }
     // if( !(this.state.phone1) ) {
     //   alert("Phone number 1 is required!")
     //   return;
@@ -50,20 +75,15 @@ class NewClientContact extends Component {
 		// TODO - validate!
 		axios
 			.post('/api/ClientContact', {
-
-				// firstName: this.state.firstName, 
-        // lastName: this.state.lastName,
-        // streetAddress1: this.state.streetAddress1,
-        // streetAddress2: this.state.streetAddress2, 
-        // city: this.state.city, 
-        // state: this.state.state, 
-        // ZIP: this.state.ZIP, 
-        // phone1: this.state.phone1,
-        // phone1Type: this.state.phone1Type,
-        // phone2: this.state.phone2,
-        // phone2Type: this.state.phone2Type,
-        // notes: this.state.notes,  
-        // email: this.state.email  
+        contactDate: this.state.contactDate,
+        expressedNeed: this.state.expressedNeed,
+        helpProvided: this.state.helpProvided,
+        dollarAmount: this.state.dollarAmount,
+        giftCards: this.state.giftCards,
+        notes: this.state.notes,
+        clientId: this.state.clientId,
+        userId: this.state.userId
+				  
 			})
 			.then(response => {
 				console.log(response)
@@ -77,9 +97,31 @@ class NewClientContact extends Component {
 				}
 			})
 			.catch(err => {
-				console.log("GOOGLE OAUTH ERROR: ", err)
+				console.log("ClientContact Post ERROR: ", err)
 			})
-	}
+  }
+  
+  componentDidMount() {
+    // TODO -- Get userId
+    axios.get('/auth/user').then(response => {
+			console.log("axios.get. response.data: ", response.data)
+			if (!!response.data.user) {
+				console.log("response.data.user.username ::>",response.data.user.username);
+				console.log('THERE IS A USER')
+				this.setState({
+					loggedIn: true,
+					// user: response.user
+					user: response.data.user
+				})
+			} else {
+				this.setState({
+					loggedIn: false,
+					user: null
+				})
+				console.log("NewClientContact componentDidMount. user: ", this.state.user);
+			}
+		})
+  }
 	render() {
 		if (this.state.redirectTo) {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
@@ -88,11 +130,20 @@ class NewClientContact extends Component {
 			<div className="NewClientContactForm">
 				<div className="container">
           <div className="row">
-            <h1 className="col-sm-12 text-center bg-primary text-light">New Client Contact</h1>
+            <h1 className="col-sm-12 text-center bg-primary text-light">New Client Encounter</h1>
           </div>
           <div className="row p-1">
             <div className="col-sm-12">
-              <label className="mr-2" htmlFor="firstName">Contact Date: </label>
+            <ClientSearchCard 
+              clientNames={this.state.clientNames}
+              clientChange={this.handleClientChange}
+            />
+            <span>{this.state.selectedClientName}</span>
+            </div>
+          </div>
+          <div className="row p-1">
+            <div className="col-sm-12">
+              <label className="mr-2" htmlFor="contactDate">Contact Date: </label>
               <input
                 type="text"
                 name="contactDate"
@@ -151,11 +202,11 @@ class NewClientContact extends Component {
               />
             </div>
           </div>
-          <label htmlFor="Notes">Notes: </label>
+          <label htmlFor="notes">notes: </label>
           <input
             type="text"
-            name="Notes"
-            value={this.state.Notes}
+            name="notes"
+            value={this.state.notes}
             onChange={this.handleChange}
             />
           
