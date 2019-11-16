@@ -95,7 +95,8 @@ class NewClientForm extends Component {
       return;
     }
     if(!!(this.state.email)) {
-      if(!this.state.email.match(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/)) {
+      if(!this.state.email.match(/^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$/)) {
+      // if(!this.state.email.match(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/)) {
         alert("Incorrect email format!")
         return;
       }
