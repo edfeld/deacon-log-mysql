@@ -237,18 +237,6 @@ class App extends Component {
 						</div>
 					}
 				/>
-				<Route
-					exact
-					path="/login"
-					render={() =>
-						<div className='container'>
-						<LoginForm
-							_login={this._login}
-							_googleSignin={this._googleSignin}
-						/>
-						</div>
-					}
-				/>
 				</div>
 			)
 		}
