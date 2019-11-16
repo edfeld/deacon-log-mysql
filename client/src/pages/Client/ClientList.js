@@ -29,13 +29,13 @@ class ClientList extends Component {
       // email: '', 
     }
     // Comment this out for Prod
-    if (window.performance) {
-      if (performance.navigation.type == 1) {
-        alert( "This page is reloaded" );
-      } else {
-        alert( "This page is not reloaded");
-      }
-    }
+    // if (window.performance) {
+    //   if (performance.navigation.type == 1) {
+    //     alert( "This page is reloaded" );
+    //   } else {
+    //     alert( "This page is not reloaded");
+    //   }
+    // }
     
     // this.setState({ loggedIn: this.props.loggedIn });
     // console.log("ClientList user loggedIn: ", this.state.loggedIn);
@@ -143,29 +143,29 @@ class ClientList extends Component {
               </div>
 		        )
 	        }
-          <h1>Client List</h1>
+          <h1 className="title">Client List</h1>
           <div className="container">
-          {(this.state.clients.length)?
-            (
-              this.state.clients.map( client => (
-                <ClientCard
-                  key={client.id}
-                  lastName={client.lastName}
-                  firstName={client.firstName}
-                  streetAddress1={client.streetAddress1}
-                  streetAddress2={client.streetAddress2}
-                  city={client.city}
-                  USState={client.state}
-                  ZIP={client.ZIP}
-                  phone1={client.phone1}
-                  phone1Type={client.phone1Type}
-                  phone2={client.phone2}
-                  phone2Type={client.phone2Type}
-                  notes={client.notes}
-                />
-            )) 
-            ):(<div>Log In!</div>)
-          }
+            {(this.state.clients.length)?
+              (
+                this.state.clients.map( client => (
+                  <ClientCard
+                    key={client.id}
+                    lastName={client.lastName}
+                    firstName={client.firstName}
+                    streetAddress1={client.streetAddress1}
+                    streetAddress2={client.streetAddress2}
+                    city={client.city}
+                    USState={client.state}
+                    ZIP={client.ZIP}
+                    phone1={client.phone1}
+                    phone1Type={client.phone1Type}
+                    phone2={client.phone2}
+                    phone2Type={client.phone2Type}
+                    notes={client.notes}
+                  />
+              )) 
+              ):(<div>Log In!</div>)
+            }
           </div>
         </div>
       )

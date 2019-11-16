@@ -132,23 +132,108 @@ class App extends Component {
 
 	render() {
 		if (this.state.user) {
-		console.log("apps.js user, loggedIn: ", this.state.user.username + " " + this.state.loggedIn);
-		}
-		return (
-			<div className="App" style={{height: '100%'}}>
-				<Nav 
-					_logout={this._logout}
-				/>
-				<Route 
-					exact 
-					path="/" 
-					render={() => 
-						<div className='container'>
-							<Home 
-								user={this.state.user}  
-								_logout={this._logout} 
-								loggedIn={this.state.loggedIn} 
+			console.log("apps.js user, loggedIn: ", this.state.user.username + " " + this.state.loggedIn);
+			return (
+				<div className="App" style={{height: '100%'}}>
+					<Nav 
+						_logout={this._logout}
+					/>
+					<Route 
+						exact 
+						path="/" 
+						render={() => 
+							<div className='container'>
+								<Home 
+									user={this.state.user}  
+									_logout={this._logout} 
+									loggedIn={this.state.loggedIn} 
+									/>
+							</div>
+						}
+						/>
+					<Route
+						exact
+						path="/login"
+						render={() =>
+							<div className='container'>
+							<LoginForm
+								_login={this._login}
+								_googleSignin={this._googleSignin}
+								/>
+							</div>
+						}
+						/>
+					<Route 
+						exact 
+						path="/user"  // [ere] 20190205-1900
+						render={(props) =>
+							<div>
+							</div>
+						} 
+						/>
+					<Route 
+						exact 
+						path="/newclient"  
+						render={(props) =>
+							<NewClientForm />
+						} 
+						/>
+					<Route 
+						exact 
+						path="/clients"  
+						render={() =>
+							(
+								<ClientList 
+								user={this.state.user}
+								loggedIn={this.state.loggedIn}
+								/>
+								)
+							}
 							/>
+					<Route 
+						exact 
+						path="/history"  
+						render={(props) =>
+							<ClientContactsList />
+						} 
+						/>
+					<Route 
+						exact 
+						path="/newencounter"  
+						render={(props) =>
+							<NewClientContact />
+						} 
+						/>
+					<Route 
+						exact 
+						path="/api/search/:tags"
+						render={() =>
+							<div>
+								
+								{/* <SearchResults
+									results={this.state.searchResults}	
+								/> */}
+							</div>
+						}  
+						/>
+					{/* <LoginForm _login={this._login} /> */}
+				</div>
+			)
+		} else {
+			return (
+				<div className="App" style={{height: '100%'}}>
+				<Nav 
+						_logout={this._logout}
+				/>
+				<Route
+					exact
+					path="/login"
+					render={() =>
+						<div className='container'>
+						<LoginForm
+							_login={this._login}
+							_googleSignin={this._googleSignin}
+						/>
 						</div>
 					}
 				/>
@@ -164,60 +249,9 @@ class App extends Component {
 						</div>
 					}
 				/>
-				<Route 
-					exact 
-					path="/user"  // [ere] 20190205-1900
-					render={(props) =>
-						<div>
-						</div>
-					} 
-				/>
-				<Route 
-					exact 
-					path="/newclient"  
-					render={(props) =>
-						<NewClientForm />
-					} 
-				/>
-				<Route 
-					exact 
-					path="/clients"  
-					render={() =>
-						<ClientList 
-							user={this.state.user}
-							loggedIn={this.state.loggedIn}
-						/>
-					} 
-				/>
-				<Route 
-					exact 
-					path="/history"  
-					render={(props) =>
-						<ClientContactsList />
-					} 
-				/>
-				<Route 
-					exact 
-					path="/newencounter"  
-					render={(props) =>
-						<NewClientContact />
-					} 
-				/>
-				<Route 
-					exact 
-					path="/api/search/:tags"
-					render={() =>
-						<div>
-							
-							{/* <SearchResults
-								results={this.state.searchResults}	
-							/> */}
-						</div>
-					}  
-					/>
-				{/* <LoginForm _login={this._login} /> */}
-			</div>
-		)
+				</div>
+			)
+		}
 	}
 }
 
