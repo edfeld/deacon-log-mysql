@@ -2,6 +2,9 @@
 	"name": "mern",
 	"version": "1.0.0",
 	"description": "Deacon Log server",
+	"repository": {
+    "type": "git",
+    "url": "git://github.com/edfeld/deacon-log-mysql.git",
 	"main": "server.js",
 	"scripts": {
 		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
