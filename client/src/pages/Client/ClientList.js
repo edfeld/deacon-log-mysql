@@ -122,10 +122,10 @@ class ClientList extends Component {
                 {/* <Nav /> */}
 
                 <div className="Undefined">
-                      <p>Current Userr: {this.props.user.userName}</p> 
-                      <code>
+                      <p>Current User: {this.props.user.username || ""}</p> 
+                      {/* <code>
                             {JSON.stringify(this.props.user)}
-                      </code>
+                      </code> */}
                 </div>
               </div>
 		        ):
@@ -135,10 +135,10 @@ class ClientList extends Component {
               <div style={{backgroundImage: "inherit"}}>
                 {/* <TitleBar /> */}
                 <div className="clients">
-                      <p>Current User:</p>
-                      <code>
+                      <p>Current User:  {this.props.user.username || ""}</p>
+                      {/* <code>
                             {JSON.stringify(this.props)}
-                      </code>
+                      </code> */}
                 </div>
               </div>
 		        )
