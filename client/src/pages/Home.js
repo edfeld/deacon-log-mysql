@@ -15,10 +15,10 @@ const Home = props => {
               {/* <Nav /> */}
 
               <div className="Home">
-                    <p>Current User:  {this.props.user.username || ""}</p> 
-                    {/* <code>
+                    <p>Current User:  {(props.user)? props.user.username: ""}</p> 
+                    <code>
                           {JSON.stringify(props.user)}
-                    </code> */}
+                    </code>
                     <h1>Hello User</h1>
               </div>
             </div>
@@ -31,9 +31,9 @@ const Home = props => {
               <TitleBar />
               <div className="Home">
                     <p>Current User:  {this.props.user.username || ""}</p>
-                    {/* <code>
+                    <code>
                           {JSON.stringify(props)}
-                    </code> */}
+                    </code>
                     <h1>Home Page</h1>
               </div>
             </div>
