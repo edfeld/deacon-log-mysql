@@ -122,7 +122,7 @@ class ClientList extends Component {
                 {/* <Nav /> */}
 
                 <div className="Undefined">
-                      <p>Current User: {this.props.user.username || ""}</p> 
+                      <p>Current Users: {this.props.user.username}</p> 
                       {/* <code>
                             {JSON.stringify(this.props.user)}
                       </code> */}
@@ -135,7 +135,7 @@ class ClientList extends Component {
               <div style={{backgroundImage: "inherit"}}>
                 {/* <TitleBar /> */}
                 <div className="clients">
-                      <p>Current User:  {this.props.user.username || ""}</p>
+                      <p>Current User:  {this.props.user.username}</p>
                       {/* <code>
                             {JSON.stringify(this.props)}
                       </code> */}
