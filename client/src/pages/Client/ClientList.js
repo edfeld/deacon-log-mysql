@@ -122,7 +122,7 @@ class ClientList extends Component {
                 {/* <Nav /> */}
 
                 <div className="Undefined">
-                      <p>Current User:</p> 
+                      <p>Current User: {this.props.user.userName}</p> 
                       <code>
                             {JSON.stringify(this.props.user)}
                       </code>
