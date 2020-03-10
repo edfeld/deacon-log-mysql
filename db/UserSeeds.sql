@@ -5,6 +5,28 @@ drop table IF EXISTS clientContacts;
 drop table IF EXISTS clients;
 drop table IF EXISTS users;
 
+/* Add user table w/o Administrator */
+SELECT * FROM deaconLog_db.users;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `passwordHashSalt` varchar(255) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `firstName` varchar(255) DEFAULT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `aboutMe` varchar(255) DEFAULT NULL,
+  `googleId` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `deletedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `users`
+ADD COLUMN administrator boolean not null default 0 AFTER PasswordHashSalt;
+
 INSERT INTO users (username, firstName, lastName, passwordHashSalt, email)
 VALUES ("edfeld", "ed", "einfeld", "$2a$10$UbJfsKl2EJsIXWZJ4UZHD.sIpQWQsrPD3jgyh1jiCb49JSgc1VEti", "edfeld@gmail.com");
 

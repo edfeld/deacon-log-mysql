@@ -104,15 +104,16 @@ class NewClientContact extends Component {
   componentDidMount() {
     // TODO -- Get userId
     axios.get('/auth/user').then(response => {
-			console.log("axios.get. response.data: ", response.data)
+			console.log("axios.get. response.data.user: ", response.data.user)
 			if (!!response.data.user) {
 				console.log("response.data.user.username ::>",response.data.user.username);
 				console.log('THERE IS A USER')
 				this.setState({
 					loggedIn: true,
 					// user: response.user
-					user: response.data.user
-				})
+          userId: response.data.user.id
+        })
+        
 			} else {
 				this.setState({
 					loggedIn: false,
@@ -122,6 +123,7 @@ class NewClientContact extends Component {
 			}
 		})
   }
+
 	render() {
 		if (this.state.redirectTo) {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />

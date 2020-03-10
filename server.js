@@ -69,8 +69,9 @@ app.use(passport.session()) // will call the deserializeUser
 // ===== testing middleware =====
 app.use(function(req, res, next) {
 	console.log('===== passport user =======')
-	console.log(req.session)
-	console.log(req.user)
+  console.log(req.session)
+  console.log((req.user)? `req.user.username: ${req.user.username}`: "");
+	// console.log("req.user.username: ", req.user.username)
 	console.log('===== END =======')
 	next()
 })

@@ -5,13 +5,19 @@
 module.exports = function (sequelize, DataTypes) {
 	var users = sequelize.define("users", {
 	  username: {
-		type: DataTypes.STRING,
-		notNull: true,
-		unique: true
+			type: DataTypes.STRING,
+			notNull: true,
+			unique: true
 		},
 		
 		passwordHashSalt: DataTypes.STRING,
-
+		
+		administrator: {
+			type: DataTypes.BOOLEAN,
+			notNull: false,
+			defaultValue: 0
+		},
+															 
 		createdAt: {
 			type: DataTypes.DATE,
 			notNull: true,

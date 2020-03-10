@@ -3,13 +3,14 @@ import axios from 'axios'
 import { Route } from 'react-router-dom'
 // import { BrowserRouter , Route, Link } from 'react-router-dom'
 import LoginForm from './components/Login/LoginForm'
-// import SignupForm from './components/SignupForm'
+
 import Home from './pages/Home'
 import Nav from './components/Nav'
 import NewClientForm from './pages/Client/NewClient';
 import ClientList from './pages/Client/ClientList';
 import NewClientContact from './pages/ClientContacts/NewClientContact';
 import ClientContactsList from './pages/ClientContacts/ClientContactsList';
+import SignupForm from './components/SignupForm'
 
 
 // import MasterModal from './components/AllModals/MasterModal'
@@ -114,22 +115,6 @@ class App extends Component {
 	}
 
 
-	// changeModal = (type) => {
-	// 	if(type === ''){
-	// 		document.getElementsByClassName('opacityTransition')[0].style.opacity = '0';
-	// 		let that = this;
-	// 		function x (){
-	// 			that.setState({currentModal: type});
-	// 		}
-	// 		setTimeout(function(){
-	// 			x()
-	// 		}, 300)
-		
-	// 	}else{
-	// 	 	this.setState({currentModal: type});
-	// 	}
-	// }
-
 	render() {
 		if (this.state.user) {
 			console.log("apps.js user, loggedIn: ", this.state.user.username + " " + this.state.loggedIn);
@@ -157,6 +142,18 @@ class App extends Component {
 						render={() =>
 							<div className='container'>
 							<LoginForm
+								_login={this._login}
+								_googleSignin={this._googleSignin}
+								/>
+							</div>
+						}
+						/>
+					<Route
+						exact
+						path="/signup"
+						render={() =>
+							<div className='container'>
+							<SignupForm
 								_login={this._login}
 								_googleSignin={this._googleSignin}
 								/>
