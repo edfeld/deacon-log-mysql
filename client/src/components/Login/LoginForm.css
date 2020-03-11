@@ -23,7 +23,12 @@
 
 .login-frm-elem {
     margin: 5px 8px 15px 5px;
+    width: 75%;
 
+}
+
+label.login-frm-elem {
+  width: 20%;
 }
 
 @media (min-width: 1px) and (max-width: 640px) {
@@ -43,6 +48,11 @@
     .Google-Login-Btn {
         margin: 5px 0 5px 3px;
     }
-
+    label.login-frm-elem {
+      width: 17%;
+    }
+    .login-frm-elem {
+      width:73%;
+    }
 
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
-import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
+// import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 
 class LoginForm extends Component {
 	constructor() {
@@ -39,28 +39,33 @@ class LoginForm extends Component {
 				<div className="login-form">
 					<h3 className='login-head'>User Login</h3>
 					<form>
-						<label className='login-frm-elem' htmlFor="username">Username: </label>
-						<input className='login-frm-elem'
-							type="text"
-							name="username"
-							value={this.state.username}
-							onChange={this.handleChange}
-						/>
-						<label className='login-frm-elem' htmlFor="password">Password: </label>
-						<input className='login-frm-elem'
-							type="password"
-							name="password"
-							value={this.state.password}
-							onChange={this.handleChange}
-						/>
-						<button onClick={this.handleSubmit}>Login</button>
+            <div className="container">
+              <div className="row">
+                <label className='login-frm-elem' htmlFor="username">Username: </label>
+                <input className='login-frm-elem'
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="row">
+                <label className='login-frm-elem' htmlFor="password">Password: </label>
+                <input className='login-frm-elem'
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+                </div>
+              <button onClick={this.handleSubmit}>Login</button>
+            </div>
 					</form>
-					<div className='Google-Login-Btn'>
+					{/* <div className='Google-Login-Btn'>
 						<a  href="/auth/google">
-						{/* <GoogleButton /> */}
 						<img src={googleButton} alt="sign into Google Button" />
 						</a>
-					</div>
+					</div> */}
 				</div>
 			)
 		}
