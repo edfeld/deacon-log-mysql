@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 // import { BrowserRouter , Route, Link } from 'react-router-dom'
 import LoginForm from './components/Login/LoginForm'
 
@@ -116,8 +116,8 @@ class App extends Component {
 
 
 	render() {
-		if (this.state.user) {
-			console.log("apps.js user, loggedIn: ", this.state.user.username + " " + this.state.loggedIn);
+		// if (this.state.user) {
+			console.log("apps.js user, loggedIn: ", (this.state.user ? this.state.user.username: null) + " " + this.state.loggedIn);
 			return (
 				<div className="App" style={{height: '100%'}}>
 					<Nav 
@@ -126,16 +126,19 @@ class App extends Component {
 					<Route 
 						exact 
 						path="/" 
-						render={() => 
+						render={() => ( this.state.loggedIn? 
+              (
 							<div className='container'>
 								<Home 
 									user={this.state.user}  
 									_logout={this._logout} 
 									loggedIn={this.state.loggedIn} 
 									/>
-							</div>
-						}
-						/>
+							  </div>
+              ): (
+                <Redirect to="/login"/>
+              )
+            )}/>
 					<Route
 						exact
 						path="/login"
@@ -216,27 +219,27 @@ class App extends Component {
 					{/* <LoginForm _login={this._login} /> */}
 				</div>
 			)
-		} else {
-			return (
-				<div className="App" style={{height: '100%'}}>
-				<Nav 
-						_logout={this._logout}
-				/>
-				<Route
-					exact
-					path="/login"
-					render={() =>
-						<div className='container'>
-						<LoginForm
-							_login={this._login}
-							_googleSignin={this._googleSignin}
-						/>
-						</div>
-					}
-				/>
-				</div>
-			)
-		}
+		// } else {
+		// 	return (
+		// 		<div className="App" style={{height: '100%'}}>
+		// 		<Nav 
+		// 				_logout={this._logout}
+		// 		/>
+		// 		<Route
+		// 			exact
+		// 			path="/login"
+		// 			render={() =>
+		// 				<div className='container'>
+		// 				<LoginForm
+		// 					_login={this._login}
+		// 					_googleSignin={this._googleSignin}
+		// 				/>
+		// 				</div>
+		// 			}
+		// 		/>
+		// 		</div>
+		// 	)
+		// }
 	}
 }
 

@@ -19,7 +19,7 @@ class ClientContactList extends Component {
     
   }
   
-  componentWillMount() {
+  componentDidMount() {
     // Get all clients
     axios
     .get("/api/clients")

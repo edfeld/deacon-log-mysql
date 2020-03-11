@@ -27,16 +27,16 @@ const Home = props => {
             // props.allposts()
             console.log('posts in home ',props)
 		return (
-            <div style={{backgroundImage: "inherit"}}>
-              <TitleBar />
-              <div className="Home">
-                    <p>Current User:  {this.props.user.username || ""}</p>
-                    <code>
-                          {JSON.stringify(props)}
-                    </code>
-                    <h1>Home Page</h1>
-              </div>
-            </div>
+      <div style={{backgroundImage: "inherit"}}>
+        <TitleBar />
+        <div className="Home">
+              <p>Current User:  {(props.user ? props.user.username : "")}</p>
+              <code>
+                    {JSON.stringify(props)}
+              </code>
+              <h1>Home Page</h1>
+        </div>
+      </div>
 		)
 	}
 }
