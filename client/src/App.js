@@ -170,40 +170,56 @@ class App extends Component {
 							<div>
 							</div>
 						} 
-						/>
+					/>
 					<Route 
 						exact 
 						path="/newclient"  
-						render={(props) =>
-							<NewClientForm />
-						} 
-						/>
+						render={(props) =>( this.state.loggedIn? 
+              (
+                <NewClientForm />
+              ): (
+                <Redirect to="/login"/>
+              )
+            )} 
+					/>
 					<Route 
 						exact 
 						path="/clients"  
 						render={() =>
-							(
-								<ClientList 
-								user={this.state.user}
-								loggedIn={this.state.loggedIn}
-								/>
-								)
-							}
-							/>
+              ( this.state.loggedIn?
+                ( <ClientList 
+                  user={this.state.user}
+                  loggedIn={this.state.loggedIn}
+                  />
+                  ): (
+                    <Redirect to="/login"/>
+                )
+              )}
+					/>
 					<Route 
 						exact 
 						path="/history"  
-						render={(props) =>
-							<ClientContactsList />
-						} 
+            render={(props) =>
+              ( this.state.loggedIn?
+                ( 
+                  <ClientContactsList />
+                ):(
+                  <Redirect to="/login"/>
+                )
+              )} 
 						/>
 					<Route 
 						exact 
 						path="/newencounter"  
-						render={(props) =>
-							<NewClientContact />
-						} 
-						/>
+            render={(props) =>
+              ( this.state.loggedIn?
+                ( 
+                  <NewClientContact />
+                ):(
+                  <Redirect to="/login"/>
+                )
+              )} 
+					/>
 					<Route 
 						exact 
 						path="/api/search/:tags"
